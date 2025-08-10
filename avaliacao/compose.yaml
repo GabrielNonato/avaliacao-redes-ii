@@ -1,0 +1,43 @@
+services:
+  app:
+    build:
+      context: .
+    image: avaliacao1
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    environment:
+      NODE_ENV: development
+      DB_USER: postgres
+      DB_HOST: db
+      DB_DATABASE: avaliacaobetao
+      DB_PASSWORD: avaliacao
+      DB_PORT: 5432
+      DATABASE_URL: postgresql://postgres:avaliacao@db:5432/avaliacaobetao?schema=public
+    depends_on:
+      - db
+    develop:
+      watch:
+        - action: sync
+          path: ./src/app
+          target: /app/src/app
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+
+
+  db:
+    image: postgres:15
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: avaliacao
+      POSTGRES_DB: avaliacaobetao
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
