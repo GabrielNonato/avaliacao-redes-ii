@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS Atividades (
+  id SERIAL PRIMARY KEY,
+  nome VARCHAR(255),
+  dataParaRealizar TIMESTAMP
+);

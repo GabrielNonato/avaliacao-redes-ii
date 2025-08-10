@@ -1,14 +1,14 @@
-# Etapa de build
 FROM node:18-alpine
 
-# Instalar git (necessário para clonar repositório)
+# Instalar git
 RUN apk add --no-cache git
 
 # Definir diretório de trabalho
 WORKDIR /app
 
-# Clonar o repositório direto do GitHub (mude para o seu link)
-RUN git clone https://github.com/GabrielNonato/avaliacao-redes-ii.git .
+# Clonar o repositório diretamente na pasta /app
+RUN git clone https://github.com/GabrielNonato/avaliacao-redes-ii.git . \
+    && git checkout main
 
 # Instalar dependências
 RUN npm install
@@ -16,5 +16,5 @@ RUN npm install
 # Expor a porta do Next.js
 EXPOSE 3000
 
-# Rodar em modo desenvolvimento
+# Rodar aplicação
 CMD ["npm", "run", "dev"]
