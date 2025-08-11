@@ -2,8 +2,6 @@ version: "3.9"
 
 services:
   app:
-    build:
-      context: .
     image: avaliacao1
     ports:
       - "3000:3000"
